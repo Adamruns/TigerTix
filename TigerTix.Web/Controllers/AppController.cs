@@ -1,20 +1,34 @@
 using Microsoft.AspNetCore.Mvc;
 using TigerTix.Web.Data;
-
-public class AppController : Controller
+using TigerTix.Web.Models;
+namespace TigerTix.Web.Controllers
 {
-    private readonly TigerTixContext _context;
-
-    public AppController(TigerTixContext context)
+    public class AppController : Controller
     {
-        _context = context;
-    }
+        private readonly TigerTixContext _context;
 
-    public IActionResult ShowUsers()
-    {
-        //LINQ Query
-        var results = from u in _context.Users
-                select u;
-        return View(results.ToList());
+        public AppController(TigerTixContext context)
+        {
+            _context = context;
+        }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost("/App")]
+        public IActionResult Index(IndexViewModel model)
+        {
+            return View();
+        }
+
+        public IActionResult ShowUsers()
+        {
+            //LINQ Query
+            var results = from u in _context.Users
+                    select u;
+            return View(results.ToList());
+        }
     }
 }

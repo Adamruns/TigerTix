@@ -1,8 +1,8 @@
 {
   "Files": [
     {
-      "Id": "/Users/adamsmith/Documents/School4/CPSC3720/TigerTix.Web/TigerTix.Web/wwwroot/index.html",
-      "PackagePath": "staticwebassets/index.html"
+      "Id": "/Users/adamsmith/Documents/School4/CPSC3720/TigerTix.Web/TigerTix.Web/wwwroot/Controllers/AppController.cs",
+      "PackagePath": "staticwebassets/Controllers/AppController.cs"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.TigerTix.Web.Microsoft.AspNetCore.StaticWebAssets.props",
