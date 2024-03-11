@@ -4046,20 +4046,20 @@
     ]
   },
   "packageFolders": {
-    "/Users/adamsmith/.nuget/packages/": {}
+    ".nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/adamsmith/Documents/School4/CPSC3720/TigerTix.Web/TigerTix.Web/TigerTix.Web.csproj",
+      "projectUniqueName": "TigerTix.Web.csproj",
       "projectName": "TigerTix.Web",
-      "projectPath": "/Users/adamsmith/Documents/School4/CPSC3720/TigerTix.Web/TigerTix.Web/TigerTix.Web.csproj",
-      "packagesPath": "/Users/adamsmith/.nuget/packages/",
-      "outputPath": "/Users/adamsmith/Documents/School4/CPSC3720/TigerTix.Web/TigerTix.Web/obj/",
+      "projectPath": "TigerTix.Web.csproj",
+      "packagesPath": ".nuget/packages/",
+      "outputPath": "obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/adamsmith/Documents/School4/CPSC3720/TigerTix.Web/TigerTix.Web/NuGet.Config",
-        "/Users/adamsmith/.nuget/NuGet/NuGet.Config"
+        "NuGet.Config",
+        ".nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
