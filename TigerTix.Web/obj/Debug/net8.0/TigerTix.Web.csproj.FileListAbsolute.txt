@@ -133,3 +133,4 @@
 /Users/adamsmith/Documents/School4/CPSC3720/TigerTix.Web/TigerTix.Web/obj/Debug/net8.0/ref/TigerTix.Web.dll
 /Users/adamsmith/Documents/School4/CPSC3720/TigerTix.Web/TigerTix.Web/obj/Debug/net8.0/TigerTix.Web.RazorAssemblyInfo.cache
 /Users/adamsmith/Documents/School4/CPSC3720/TigerTix.Web/TigerTix.Web/obj/Debug/net8.0/TigerTix.Web.RazorAssemblyInfo.cs
+/Users/adamsmith/Documents/School4/CPSC3720/TigerTix.Web/TigerTix.Web/bin/Debug/net8.0/NuGet.Config

@@ -4058,6 +4058,7 @@
       "outputPath": "/Users/adamsmith/Documents/School4/CPSC3720/TigerTix.Web/TigerTix.Web/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
+        "/Users/adamsmith/Documents/School4/CPSC3720/TigerTix.Web/TigerTix.Web/NuGet.Config",
         "/Users/adamsmith/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
