@@ -20,7 +20,7 @@ if (!app.Environment.IsDevelopment())
 // app.MapGet("/", () => "Hello World!");
 app.UseDefaultFiles();
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+// app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 
