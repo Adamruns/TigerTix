@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TigerTix.Web.Data;
 using TigerTix.Web.Data.Entities;
 using TigerTix.Web.Models;
 namespace TigerTix.Web.Controllers
 {
+    [Authorize]
     public class AppController : Controller
     {
         private readonly IUserRepository _userRepository;

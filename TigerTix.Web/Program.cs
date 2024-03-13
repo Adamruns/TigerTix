@@ -1,32 +1,55 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TigerTix.Web.Data;
+using TigerTix.Web.Data.Entities; // Ensure AppUser is in this namespace
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddRazorPages();
-builder.Services.AddControllers();
+// Add services to the container.
 builder.Services.AddDbContext<TigerTixContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Register your UserRepository with the dependency injection container
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<TigerTixContext>();
+
+builder.Services.AddRazorPages();
+builder.Services.AddControllers();
 
 var app = builder.Build();
+
+// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
     app.UseHsts();
 }
-// app.MapGet("/", () => "Hello World!");
-app.UseDefaultFiles();
+
 app.UseHttpsRedirection();
-// app.UseStaticFiles();
+app.UseStaticFiles();
+
 app.UseRouting();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapRazorPages();
+app.MapGet("/", context =>
+{
+    if (!context.User.Identity.IsAuthenticated)
+    {
+        context.Response.Redirect("/Identity/Account/Login");
+    }
+    else
+    {
+        context.Response.Redirect("/Home/Index");
+    }
+    return Task.CompletedTask;
+});
 
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=App}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
 app.Run();

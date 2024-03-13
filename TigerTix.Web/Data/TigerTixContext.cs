@@ -1,7 +1,8 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TigerTix.Web.Data.Entities;
 using TigerTix.Web.Models;
-public class TigerTixContext : DbContext 
+public class TigerTixContext : IdentityDbContext<AppUser>
 {
     public DbSet<User> Users {get; set;}
     public DbSet<Event> Events { get; set; }
