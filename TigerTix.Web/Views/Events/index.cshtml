@@ -1,0 +1,32 @@
+@model IEnumerable<TigerTix.Web.Models.Event>
+
+@{
+    ViewData["Title"] = "Events List";
+}
+
+<h2>Events List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Venue</th>
+            <th>Price</th>
+            <!-- Add other event properties you wish to display -->
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var eventItem in Model)
+{
+    <tr>
+        <td>@Html.DisplayFor(modelItem => eventItem.Name)</td>
+        <td>@Html.DisplayFor(modelItem => eventItem.Date)</td>
+        <td>@Html.DisplayFor(modelItem => eventItem.Venue)</td>
+        <td>@Html.DisplayFor(modelItem => eventItem.Price)</td>
+        <!-- Add other event properties you wish to display -->
+    </tr>
+}
+
+    </tbody>
+</table>
