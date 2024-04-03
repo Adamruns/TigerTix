@@ -1,0 +1,513 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Event API
+  description: An API to manage events
+
+servers:
+  - url: https://example.com/api/v1
+
+paths:
+  /events:
+    get:
+      summary: Retrieve all events
+      responses:
+        '200':
+          description: A list of events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Create a new event
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        '201':
+          description: The created event
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /events/{id}:
+    get:
+      summary: Retrieve an event by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the event to retrieve
+      responses:
+        '200':
+          description: The requested event
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      summary: Update an event
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the event to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        '200':
+          description: The updated event
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    delete:
+      summary: Delete an event
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the event to delete
+      responses:
+        '204':
+          description: The event was successfully deleted
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /tickets/purchase:
+    post:
+      summary: Purchase a ticket
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ticket'
+      responses:
+        '201':
+          description: The ticket was successfully purchased
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /tickets/user/{userID}:
+    get:
+      summary: Retrieve tickets for a user
+      parameters:
+        - in: path
+          name: userID
+          required: true
+          schema:
+            type: string
+          description: ID of the user to retrieve tickets for
+      responses:
+        '200':
+          description: A list of tickets for the user
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ticket'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /discounts/events/{eventID}:
+    get:
+      summary: Retrieve discount for an event
+      parameters:
+        - in: path
+          name: eventID
+          required: true
+          schema:
+            type: string
+          description: ID of the event to retrieve discount for
+      responses:
+        '200':
+          description: The discount for the event
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  discount:
+                    type: number
+                    format: float
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /users/register:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: The user was successfully registered
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /users/login:
+    post:
+      summary: User login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+      responses:
+        '200':
+          description: Login successful
+        '401':
+          description: Unauthorized
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /users/{userID}:
+    get:
+      summary: Retrieve user profile
+      parameters:
+        - in: path
+          name: userID
+          required: true
+          schema:
+            type: string
+          description: ID of the user to retrieve profile for
+      responses:
+        '200':
+          description: The requested user profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    put:
+      summary: Update user profile
+      parameters:
+        - in: path
+          name: userID
+          required: true
+          schema:
+            type: string
+          description: ID of the user to update profile for
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProfile'
+      responses:
+        '200':
+          description: The updated user profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /events/{eventID}/tickets:
+    get:
+      summary: Retrieve all tickets for an event
+      parameters:
+        - in: path
+          name: eventID
+          required: true
+          schema:
+            type: string
+          description: ID of the event to retrieve tickets for
+      responses:
+        '200':
+          description: A list of tickets for the event
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ticket'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /reminders/user/{userID}:
+    get:
+      summary: Retrieve reminders for a user
+      parameters:
+        - in: path
+          name: userID
+          required: true
+          schema:
+            type: string
+          description: ID of the user to retrieve reminders for
+      responses:
+        '200':
+          description: A list of reminders for the user
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reminder'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /reminders/events/{eventID}:
+    post:
+      summary: Add a reminder for an event
+      parameters:
+        - in: path
+          name: eventID
+          required: true
+          schema:
+            type: string
+          description: ID of the event to add a reminder for
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reminder'
+      responses:
+        '201':
+          description: The reminder was successfully added
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /payments/process:
+    post:
+      summary: Process a payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payment'
+      responses:
+        '200':
+          description: Payment processed successfully
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /support/contact:
+    get:
+      summary: Get customer support contact
+      responses:
+        '200':
+          description: Contact information for customer support
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email:
+                    type: string
+                  phone:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+components:
+  schemas:
+    Event:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier for the event
+        name:
+          type: string
+          description: The name of the event
+        description:
+          type: string
+          description: A description of the event
+        date:
+          type: string
+          format: date-time
+          description: The date and time of the event
+      required:
+        - name
+        - date
+    Ticket:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier for the ticket
+        event_id:
+          type: string
+          format: uuid
+          description: The ID of the event the ticket is for
+        user_id:
+          type: string
+          format: uuid
+          description: The ID of the user who purchased the ticket
+      required:
+        - event_id
+        - user_id
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The username of the user
+        email:
+          type: string
+          format: email
+          description: The email address of the user
+        password:
+          type: string
+          description: The password of the user
+      required:
+        - username
+        - email
+        - password
+    UserLogin:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The username of the user
+        password:
+          type: string
+          description: The password of the user
+      required:
+        - username
+        - password
+    UserProfile:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The username of the user
+        email:
+          type: string
+          format: email
+          description: The email address of the user
+        bio:
+          type: string
+          description: A brief biography of the user
+      required:
+        - username
+        - email
+    Reminder:
+      type: object
+      properties:
+        event_id:
+          type: string
+          format: uuid
+          description: The ID of the event the reminder is for
+        user_id:
+          type: string
+          format: uuid
+          description: The ID of the user who set the reminder
+        datetime:
+          type: string
+          format: date-time
+          description: The date and time of the reminder
+      required:
+        - event_id
+        - user_id
+        - datetime
+    Payment:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: float
+          description: The amount of the payment
+        currency:
+          type: string
+          description: The currency of the payment
+        card_number:
+          type: string
+          description: The card number used for the payment
+        expiration_date:
+          type: string
+          format: date
+          description: The expiration date of the card used for the payment
+        cvv:
+          type: string
+          description: The CVV code of the card used for the payment
+      required:
+        - amount
+        - currency
+        - card_number
+        - expiration_date
+        - cvv
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              code:
+                type: integer
+              details:
+                type: array
+                items:
+                  type: string
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              code:
+                type: integer
