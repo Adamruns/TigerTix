@@ -16,3 +16,4 @@
 project.assets.json
 *.pfx
 *.snk
+*.vs
