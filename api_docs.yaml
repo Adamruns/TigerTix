@@ -353,6 +353,105 @@ paths:
                     type: string
         '400':
           $ref: '#/components/responses/BadRequest'
+  /notifications/preferences:
+    get:
+      summary: Retrieve notification preferences for a user
+      parameters:
+        - in: query
+          name: userID
+          required: true
+          schema:
+            type: string
+          description: ID of the user to retrieve notification preferences for
+      responses:
+        '200':
+          description: Notification preferences retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationPreferences'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    put:
+      summary: Update notification preferences for a user
+      parameters:
+        - in: query
+          name: userID
+          required: true
+          schema:
+            type: string
+          description: ID of the user to update notification preferences for
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationPreferences'
+      responses:
+        '200':
+          description: Notification preferences updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationPreferences'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /notifications/subscribe/{eventID}:
+    post:
+      summary: Subscribe to notifications for an event
+      parameters:
+        - in: path
+          name: eventID
+          required: true
+          schema:
+            type: string
+          description: ID of the event to subscribe to notifications for
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  format: uuid
+                  description: The ID of the user subscribing to notifications
+      responses:
+        '200':
+          description: Subscribed to event notifications successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /notifications/{userID}:
+    get:
+      summary: Retrieve notifications for a user
+      parameters:
+        - in: path
+          name: userID
+          required: true
+          schema:
+            type: string
+          description: ID of the user to retrieve notifications for
+      responses:
+        '200':
+          description: Notifications retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notification'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '400':
+          $ref: '#/components/responses/BadRequest'
 
 components:
   schemas:
@@ -484,6 +583,55 @@ components:
         - card_number
         - expiration_date
         - cvv
+    NotificationPreferences:
+      type: object
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          description: The ID of the user whose preferences are being set
+        email_notifications:
+          type: boolean
+          description: Whether the user wants to receive notifications via email
+        push_notifications:
+          type: boolean
+          description: Whether the user wants to receive push notifications
+        sms_notifications:
+          type: boolean
+          description: Whether the user wants to receive SMS notifications
+      required:
+        - user_id
+        - email_notifications
+        - push_notifications
+        - sms_notifications
+
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier for the notification
+        user_id:
+          type: string
+          format: uuid
+          description: The ID of the user who will receive the notification
+        event_id:
+          type: string
+          format: uuid
+          description: The ID of the event related to the notification
+        message:
+          type: string
+          description: The notification message
+        datetime:
+          type: string
+          format: date-time
+          description: The date and time when the notification was sent
+      required:
+        - user_id
+        - event_id
+        - message
+        - datetime
   responses:
     BadRequest:
       description: Bad request
