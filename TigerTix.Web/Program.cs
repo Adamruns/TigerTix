@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TigerTix.Web.Data;
 using TigerTix.Web.Data.Entities; // Ensure AppUser is in this namespace
+using YourProject.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
