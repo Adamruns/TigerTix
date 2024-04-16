@@ -8,7 +8,7 @@ a.navbar-brand {
 }
 
 a {
-  color: #0077cc;
+  color: #F56600;
 }
 
 .form-control:focus {
@@ -18,13 +18,18 @@ a {
 
 .btn-primary {
   color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+  background-color: #F56600;
+  border-color: #522D80;
+}
+
+.btn-primary:focus {
+  box-shadow: none;
+  outline: black auto 1px;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #1b6ec2;
+  background-color: #F56600;
   border-color: #1861ac;
 }
 
