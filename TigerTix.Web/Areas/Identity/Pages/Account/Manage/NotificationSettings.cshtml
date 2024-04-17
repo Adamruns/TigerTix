@@ -1,0 +1,29 @@
+@page
+@model NotificationSettingsModel
+@{
+    ViewData["Title"] = "Notification Settings";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h2>Email Notifications</h2>
+    <label>
+        <input type="checkbox" /> Receive email notifications
+    </label>
+    <!-- Additional email notification settings -->
+
+    <h2>Push Notifications</h2>
+    <label>
+        <input type="checkbox" /> Enable push notifications
+    </label>
+    <!-- Additional push notification settings -->
+
+    <!-- Other notification settings as needed -->
+</div>
+
+<!--
+<li class="nav-item">
+    <a class="nav-link @ManageNavPages.NotificationSettingsNavClass(ViewContext)" asp-area="Identity" asp-page="/Account/Manage/NotificationSettings">Notification Settings</a>
+</li>
+-->
