@@ -63,6 +63,8 @@ namespace  TigerTix.Web.Areas.Identity.Pages.Account.Manage
 
         public static string NotificationSettings => "NotificationSettings";
 
+        public static string SavePaymentInfo => "SavePaymentInfo";
+
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -113,6 +115,7 @@ namespace  TigerTix.Web.Areas.Identity.Pages.Account.Manage
 
         public static string NotificationSettingsNavClass(ViewContext viewContext) => PageNavClass(viewContext, NotificationSettings);
 
+        public static string SavePaymentInfoNavClass(ViewContext viewContext) => PageNavClass(viewContext, SavePaymentInfo);
         
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
